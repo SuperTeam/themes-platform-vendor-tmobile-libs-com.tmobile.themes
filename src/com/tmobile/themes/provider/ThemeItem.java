@@ -30,13 +30,16 @@ import android.net.Uri;
  * <h2>Usage</h2>
  * <p>Here is an example of looping through a Cursor with ThemeItem:</p>
  * <pre  class="prettyprint">
- *      ThemeItem item = new ThemeItem(Themes.listThemes(myContext));
- *      try {
- *          while (c.moveToNext()) {
- *              //Do something with the item
+ *      Cursor c = Themes.listThemes(myContext);
+ *      ThemeItem item = ThemeItem(c);
+ *      if (item != null) {
+ *          try {
+ *              do {
+ *                  //Do something with the item
+ *              } while (c.moveToNext());
+ *          } finally {
+ *              item.close();
  *          }
- *      } finally {
- *          item.close();
  *      }
  * </pre>
  */
@@ -71,14 +74,14 @@ public class ThemeItem extends AbstractDAOItem {
     };
 
     /**
-     * @see AbstractDAOItem.Creator#newInstance(Context, Uri)
+     * {@inheritDoc}
      */
     public static ThemeItem getInstance(Context context, Uri uri) {
         return CREATOR.newInstance(context, uri);
     }
 
     /**
-     * @see AbstractDAOItem.Creator#newInstance(Cursor)
+     * {@inheritDoc}
      */
     public static ThemeItem getInstance(Cursor c) {
         return CREATOR.newInstance(c);
@@ -242,18 +245,10 @@ public class ThemeItem extends AbstractDAOItem {
 
     /**
      * A theme may specify a preview image to represent a theme.
-     *
-     * @param orientation the screen orientation for which a preview image is
-     * desired.  Orientation values come from {@link android.content.res.Configuration}
      * @return the preview image uri, or null if this theme doesn't specify one.
      */
-    public Uri getPreviewUri(int orientation) {
-        Uri uri = parseUriNullSafe(mCursor.getString(mColumnPreviewUri));
-        if (null != uri) {
-            uri = uri.buildUpon().appendQueryParameter(Themes.KEY_ORIENTATION,
-                    String.valueOf(orientation)).build();
-        }
-        return uri;
+    public Uri getPreviewUri() {
+        return parseUriNullSafe(mCursor.getString(mColumnPreviewUri));
     }
 
     /** @deprecated */

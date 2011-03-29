@@ -92,14 +92,10 @@ public abstract class AbstractDAOItem {
 
     protected abstract static class Creator<T extends AbstractDAOItem> {
         /**
-         * Creates an {@link AbstractDAOItem} for the specified {@link Uri} with
-         * the {@link Cursor} positioned to the first entry.
-         *
+         * Creates an {@link AbstractDAOItem} for the specified {@link Uri} with the {@link Cursor} positioned to the first entry.
          * @param context the {@link Context} of the caller.
          * @param uri the {@link Uri} of the item(s).
-         * @return an {@link AbstractDAOItem} positioned to the first entry in
-         *         the {@link Cursor}. If there are no entries, null is
-         *         returned.
+         * @return an {@link AbstractDAOItem} positioned to the first entry in the {@link Cursor}.
          */
         public T newInstance(Context context, Uri uri) {
             if (uri != null) {
@@ -110,13 +106,9 @@ public abstract class AbstractDAOItem {
         }
 
         /**
-         * Creates an {@link AbstractDAOItem} for the specified {@link Cursor}
-         * positioned to the first entry.
-         *
+         * Creates an {@link AbstractDAOItem} for the specified {@link Cursor} positioned to the first entry.
          * @param c a valid {@link Cursor} for the {@link AbstractDAOItem} type.
-         * @return an {@link AbstractDAOItem} positioned to the first entry in
-         *         the {@link Cursor}. If there are no entries, null is
-         *         returned.
+         * @return an {@link AbstractDAOItem} positioned to the first entry in the {@link Cursor}.
          */
         public T newInstance(Cursor c) {
             if (c != null) {

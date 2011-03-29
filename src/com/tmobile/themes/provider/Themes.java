@@ -37,8 +37,6 @@ public class Themes {
     public static final Uri CONTENT_URI =
         Uri.parse("content://" + AUTHORITY);
 
-    public static final String KEY_ORIENTATION = "orientation";
-
     private Themes() {}
 
     /**
